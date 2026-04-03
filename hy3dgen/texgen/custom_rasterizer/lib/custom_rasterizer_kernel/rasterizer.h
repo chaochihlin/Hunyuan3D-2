@@ -1,7 +1,7 @@
 #ifndef RASTERIZER_H_
 #define RASTERIZER_H_
 
-#include <torch/extension.h>
+#include <torch/types.h>
 #include <vector>
 #include <ATen/ATen.h>
 #include <ATen/cuda/CUDAContext.h> // For CUDA context

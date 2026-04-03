@@ -5,11 +5,19 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 # build with `python setup.py install`
 # nvcc is needed
 
+import sys
+extra_compile_args = {}
+if sys.platform == 'win32':
+    extra_compile_args = {
+        'cxx': [],
+        'nvcc': ['--allow-unsupported-compiler'],
+    }
+
 custom_rasterizer_module = CUDAExtension('custom_rasterizer_kernel', [
     'lib/custom_rasterizer_kernel/rasterizer.cpp',
     'lib/custom_rasterizer_kernel/grid_neighbor.cpp',
     'lib/custom_rasterizer_kernel/rasterizer_gpu.cu',
-])
+], extra_compile_args=extra_compile_args)
 
 setup(
     packages=find_packages(),
